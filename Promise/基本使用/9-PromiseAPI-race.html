@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9-PromiseAPI-race</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let P1 = new Promise((resolve,reject) => {
+        setTimeout(() => {resolve('O(∩_∩)O哈哈~')}
+        ,1000);
+    });
+    let P2 = new Promise((resolve,reject) => {
+        setTimeout(() => {resolve('(〃＞皿＜)')}
+        ,500);
+    });
+    let P3 = new Promise((resolve,reject) => {
+        setTimeout(() => {reject('Error')}
+        ,300);
+    });
+    let result =  Promise.race([P1,P2,P3]);
+    console.log(result);
+</script>
+</html>

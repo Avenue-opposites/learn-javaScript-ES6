@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX-GET请求</title>
+    <style>
+        #result {
+            margin: 10px auto;
+            width: 300px;
+            height: 500px;
+            background-image:url(/图片库/动漫网页/二次元/wallhaven-6o277w_1700x3196.png) ;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 10px solid rgb(110, 221, 83);
+            box-shadow: 2px 2px 5px 4px rgb(101, 101, 212);
+        }
+        #result:hover {
+            background-size: 150%;
+        }
+        button {
+            width: 100px;
+            height: 50px;
+            outline: none;
+            border-radius: 8px;
+            border: 5px solid rgb(0, 0, 0);
+            font-size: 10px;
+            background: linear-gradient(45deg,rgb(119, 39, 194),blue);
+            color: #fff;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="result"></div>
+    <button>点击发送请求</button>
+</body>
+<script>
+    //获取按钮元素
+    const button = document.getElementsByTagName("button")[0];
+    //获取id为result的元素
+    const result = document.getElementById("result");
+    //绑定点击事件
+    button.addEventListener('click',() => {
+        //创建请求对象
+        const XHR = new XMLHttpRequest();
+        //初始化 请求方法和URL
+        XHR.open('GET','http://127.0.0.1:8000/server')
+        //发送请求
+        XHR.send();
+        //事件绑定 处理服务端返回的结果
+        //on when 当...时候
+        //readystate 是XHR对象中的一个属性,表示就绪状态
+        //0 表示未初始化
+        //1 表示open方法调用完毕
+        //2 表示send方法调用完毕
+        //3 表示服务端返回了部分结果
+        //4 表示服务端反回了全部结果
+        //change(改变)
+        XHR.onreadystatechange = function() {
+            //判断 服务端返回了所有结果
+            if(XHR.readyState === 4) {
+                //判断 响应的状态码
+                //2xx 成功
+                if(XHR.status >= 200 && XHR.status < 300) {
+                    //处理结果 行 头 空行 体
+                    //响应
+                    console.log("响应状态码",this.status);//状态码
+                    console.log("响应状态字符串",this.statusText);//状态字符串
+                    console.log("响应头",this.getAllResponseHeaders());//所有响应头
+                    console.log("响应体 是一个JSON对象",this.response);//响应体
+                    let obj = JSON.parse(this.response);
+                    result.style.backgroundImage = obj.imgUrl ;
+                    
+                }
+            }
+        };
+    });
+</script>
+<!-- <script src="/ES6学习/AJAX/原生AJAX/server.js"></script> -->
+</html>

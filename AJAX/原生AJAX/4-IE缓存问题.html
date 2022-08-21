@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-IE缓存问题</title>
+    <style>
+        #result {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #000;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">send</button>
+    <div class="" id="result"></div>
+</body>
+<script>
+    const btn = document.querySelector('#btn');
+    const result = document.querySelector('#result');
+    btn.addEventListener('click',function() {
+        const XHR = new XMLHttpRequest();
+        XHR.open('GET','http://127.0.0.1:8000/ie?t='+Date.now());
+        XHR.send();
+        XHR.onreadystatechange = function() {
+            if(this.readyState === 4) {
+                if(this.status >= 200 && this.status < 300) {
+                    result.innerHTML = this.response;                }
+            }
+        }
+    });
+</script>
+</html>

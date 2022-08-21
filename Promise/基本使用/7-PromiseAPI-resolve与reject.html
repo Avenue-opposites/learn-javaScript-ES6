@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-PromiseAPI-resolve与reject</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //Promise.resolve('成功') 返回一个成功的Promise对象
+    //Promise.resolve
+    //如果参数为非Promise对象,则返回的结果为成功Promise对象
+    //如果参数为Promise对象,则参数的结果决定resolve的结果
+    let p1 = Promise.resolve('成功');
+    let p2 = Promise.resolve(new Promise((resolve,reject) => {
+        // resolve('OK');//Promise {<fulfilled>: 'OK'}
+        // reject('Error');//Promise {<rejected>:'Error'}
+    }));
+    console.log(p2);
+    //Promise.reject
+    //无论传入任何参数,都返回一个失败的Promise对象,而且这个Promise对象的结果是传入的参数
+    let p3 = Promise.reject('error');
+    console.log(p3);
+</script>
+</html>

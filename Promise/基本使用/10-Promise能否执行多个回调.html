@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-Promise能否执行多个回调</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // setTimeout(() => {
+    //     console.log('延时器')
+    // },100);
+    let p = new Promise((resolve,reject) => {
+        // console.log('Promise对象');
+        resolve('Promise对象回调');
+    });
+    //回调-1
+    p.then(value => {
+        console.log(value+'-1');
+    });
+    //回调-2
+    p.then(value => {
+        console.log(value+'-2');
+    });
+    console.log('能');
+</script>
+</html>

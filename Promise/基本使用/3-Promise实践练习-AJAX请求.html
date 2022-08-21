@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise-AXJX请求</title>
+    <style>
+        p {
+            font-size: 2.5em;
+            border-bottom: 1px solid #000;
+        }
+        .btn {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(135, 146, 148);
+            border-top:2px solid #000;
+            border-right:2px solid #000;
+            border-left: 6px solid rgb(32, 32, 32);
+            border-bottom: 6px solid rgb(32, 32, 32);
+            transition: 100ms all ;
+            color: #fff;
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .btn:hover {
+            background: rgb(62, 240, 136);
+            border-top:2px solid rgb(26, 92, 53);
+            border-right:2px solid rgb(26, 92, 53);
+            border-left: 6px solid rgb(26, 92, 53);
+            border-bottom: 6px solid rgb(26, 92, 53);
+        }
+        .btn:active {
+            border-top:0.5px solid rgb(26, 92, 53);
+            border-right:0.5px solid rgb(26, 92, 53);
+            border-left: 0.5px solid rgb(26, 92, 53);
+            border-bottom: 0.5px solid rgb(26, 92, 53);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="page-header">Promise-AXJX请求</p>
+        <button class="btn">send</button>
+    </div>
+</body>
+<script>
+    const btn = document.querySelector(".btn");
+    btn.addEventListener('click',() => {
+        const p = new Promise((resolve,reject) => {
+            //创建请求对象
+         const XHR = new XMLHttpRequest();
+         // XHR.timeout = 2000;
+         XHR.open('GET','http://127.0.0.1:9000/Promise-ajax');
+         XHR.send();
+         //等待服务器响应
+         XHR.onreadystatechange = function() {
+             if(this.readyState === 4) {
+                 if(this.status >= 200 && this.status < 300) {
+                    //  console.log(1);
+                     resolve(this.response)
+                 }else {
+                    //  console.log(0); 
+                     reject(this.statusText)
+                 }
+             }
+         }
+        }).then(value => console.log(value),reason => console.log(reason))
+    });
+    
+</script>
+</html>

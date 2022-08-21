@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14-如何中断Promise链</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const p = new Promise((resolve,reject) => {
+        resolve("OK");
+    });
+    p.then(val => {
+        console.log(val);
+        return val;
+    }).then(val => {
+        console.log(val);
+        //返回一个状态为进行中的promise就行
+        return new Promise(() => {});
+    }).then(val => {
+        console.log(val);
+    });
+</script>
+</html>

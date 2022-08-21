@@ -1,0 +1,15 @@
+{
+  "name": "text",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "description": "",
+  "main": "async和await结合读取文件.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "text"
+  ],
+  "author": "pzj",
+  "license": "ISC"
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-JSON</title>
+    <style>
+        #result {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #000;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="" id="result"></div>
+</body>
+<script>
+    window.onkeydown = function() {
+        const result = document.getElementById("result");
+        const XHR = new XMLHttpRequest();
+        //设置自动把json对象转换为javascript对象
+        XHR.responseType = 'json';
+        XHR.open('GET','http://127.0.0.1:8000/json-server');
+        XHR.send();
+        XHR.onreadystatechange = function() {
+            if(this.readyState === 4) {
+                if(this.status >= 200 && this.status < 300) {
+                    result.innerText = this.response.FGO;
+                }
+            }
+        };
+    }
+</script>
+</html>

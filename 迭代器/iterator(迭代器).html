@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iteraotr(迭代器)</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //迭代器 iterator
+    const xyj = ['唐僧','孙悟空','猪八戒','沙和尚'];
+        let iterator = xyj[Symbol.iterator]();
+        //自定义一个迭代器
+        //迭代器工作原理
+        //1.创建一个指针对象,指向当前数据结构的起始位置
+        //2.调用对象的next方法,指针自动指向当前数据结构的第一个成员,
+        //3.接下来一直调用next方法,指针移动到向下一个成员,直到指针指向当前数据结构的最后一个成员
+        //每调用一个next方法,就会返回一个对象,这个对象包含一个value属性和done属性
+        const obj = {
+            name:"FGO",
+            sevent:{
+                saber:["阿尔托莉雅&潘德拉贡","千子村正","冲田总司","阿尔托莉雅(Alter)"]
+            },
+            [Symbol.iterator]:function(){//自定义这个对象的迭代器方法
+                let i = 0;//创建一个索引
+                return {//迭代器方法必须返回一个对象,这个对象必须有一个next方法,因为迭代是根据这个方法来的
+                    next:() => {//这个方法可以自己编写,但是最终结果必须返回一个包含value属性和done属性的对象
+                        if(i < this.sevent.saber.length) {//如果索引比长度小就继续迭代,否则就代表迭代完成,然后退出
+                            const resule =  {value:this.sevent.saber[i],done:false};//创建一个变量保存当前的值
+                            i++;//更新索引
+                            return resule;
+                        }else {
+                            return {value:undefined,done:true};
+                        }
+                        // if(typeof this.name === "string") {
+                        //     const resule = {value:this.name,done:false};
+                        //     return resule;
+                        // }else{
+                        //     return {value:undefined,done:true};
+                        // }
+                    }
+                 }
+            }
+        }
+        for(let val of obj) {
+            console.log(val);
+        }
+</script>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "es6-babel-browserify",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.0",
+    "@babel/preset-env": "^7.18.0"
+  },
+  "dependencies": {
+    "vue":"2.6.14"
+  },
+  "scripts": {
+    "build":"npx babel ./scr -d ./build",
+    "bundle":"browserify ./build/main.js -o ./dist/bundle.js"
+  }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13-Promise如何串联对个任务</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let p = new Promise((resolve,reject) => {
+        const rom = Math.random();
+        if(rom > 0.5) {resolve(rom)} 
+         else {
+            reject(rom);
+        }
+    });
+    p.then(value => {
+        console.log(p);
+        return new Promise((resolve,reject) =>{
+            if(value > 0.7) {
+                resolve(value);
+            }else {
+                reject(value);
+            }
+            });
+    }).then(value => {
+        console.log(value);
+        return new Promise((resolve,reject) =>{
+            if(value > 0.9) {
+                resolve(value);
+            }else {
+                reject(value);
+            }
+            });
+    }).then(value => {
+        console.log(value);
+    })
+    p.catch(reason => {
+        console.log(p,'error');
+    });
+</script>
+</html>

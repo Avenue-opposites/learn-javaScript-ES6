@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+        } */
+        h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 5em;
+            border-bottom: 1px solid #000;
+            padding: 10px;
+            margin: 5px;
+            text-shadow: 2px 0 5px rgb(221, 43, 43);
+        }
+        .get,.post,.currency {
+            height: 40px;
+            border-radius: 5px;
+            margin-left: 10px;
+            padding: 10px;
+            box-shadow: 1px 0 3px 0 #000;
+            transition: all .3s;
+        }
+        .get {
+            background-color: rgb(224, 114, 114);
+        }
+        .post {
+            background-color: rgb(59, 195, 219);
+        }
+        .currency {
+            background-color: rgb(228, 160, 33);
+        }
+        .get:hover {
+            background-color: rgb(250, 0, 0);
+        }
+        .post:hover {
+            background-color: rgb(0, 238, 255);
+        }
+        .currency:hover {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>使用axios发送AJAX请求</h1>
+    <button class="get">GET</button>
+    <button class="post">POST</button>
+    <button class="currency">CURRENCY</button>
+</body>
+<script>
+    const getBtn = document.getElementsByClassName("get")[0];
+    const postBtn = document.getElementsByClassName("post")[0];
+    const currencyBtn = document.getElementsByClassName("currency")[0];
+    axios.defaults.baseURL = 'http://127.0.0.1:8000';
+    getBtn.onclick = function() {
+        //GET请求
+        //参数
+        //1.url 2.配置对象
+        axios.get('/axios-server',{
+            params:{
+                id:1,
+                vip:7,
+            },
+            headers:{
+                name:'xx',
+                age:16,
+            }
+        }).then(value => {console.log(value)})
+    }
+    postBtn.addEventListener('click',() => {
+        //post请求
+        //参数
+        //1.URL 2.请求体 3.配置对象
+        axios.post('/axios-server',{
+                username:'admin',
+                password:'admin',
+            },{
+            params:{
+                id:2,
+                vip:9,
+            },
+            headers:{
+                name:'xxx',
+                age:17,
+            },
+        });
+    });
+    currencyBtn.addEventListener('click',() => {
+        axios({
+            //请求类型
+            method:'POST',
+            //url
+            url:'/axios-server',
+            //请求参数
+            params:{
+                id:3,
+                vip:10,
+            },
+            //请求头参数
+            headers:{
+                a:100,
+                b:200,
+            },
+            //请求体参数
+            data:{
+                uesrname:'admin',
+                password:'admin',
+            }
+        }).then(response => {
+            alert(response.data);
+        })
+    });
+</script>
+</html>

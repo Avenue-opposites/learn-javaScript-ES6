@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let案例实践s</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background: #eee;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            width: 80%;
+            height: 50%;
+            /* background-color: aqua; */
+            flex-wrap: wrap;
+        }
+        .container>.page-header {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        .container .item {
+            width: 100px;
+            height: 100px;
+            /* background-color: red; */
+            border: 1px black solid;
+            transition: all .3s;
+        }
+        .container .item:nth-child(3) {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-header">click</h1>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</body>
+<script>
+    window.onload = function() {
+        let itemDom = document.querySelectorAll(".container .item");
+        for(let i in itemDom) {
+            itemDom[i].onmouseover = function() {
+                this.style.background = "red";
+                this.onmouseout = function() {
+                this.style.background = "transparent";
+                };
+            }
+        }
+
+        // let itemDom = document.getElementsByClassName("item");
+        // for(var i = 0; i < itemDom.length;i++) {
+        //     itemDom[i].onclick = function() {
+        //         //点击事件是异步,而声明赋值是同步,且var没有块作用域,所以等到点击时i已经被赋值为3了
+        //         //解决方法：1.this 2.let块作用域
+        //         // console.log(this);//element
+        //         // console.log(itemDom[i]);//undefined
+        //         itemDom[i].style.background = 'pink';
+        //     }
+        // }//等于以下代码
+
+        // {
+        //     {
+        //         var i = 0;
+        //         itemDom[i].onclick = function() {
+        //             itemDom[i].style.background = 'pink';
+        //         // this.style.background = 'pink';
+        //         }
+        //     }
+        //     {
+        //         var i = 0;
+        //         itemDom[i].onclick = function() {
+        //             itemDom[i].style.background = 'pink';
+        //         // this.style.background = 'pink';
+        //         }
+        //     }
+        //     {
+        //         var i = 0;
+        //         itemDom[i].onclick = function() {
+        //             itemDom[i].style.background = 'pink';
+        //         // this.style.background = 'pink';
+        //         }
+        //         var i = 3
+        //     }
+        // }
+
+        // for(let i = 0; i < itemDom.length;i++) {
+        //     itemDom[i].onclick = function() {
+        //         //因为let声明赋值拥有块作用域,每个i都会独立
+        //         // console.log(this);//element
+        //         // console.log(itemDom[i]);element
+        //         itemDom[i].style.background = 'pink';
+        //     }
+        // }//等于以下代码
+
+        // {
+        //     let i = 0;
+        //     itemDom[i].onclick = function() {
+        //         itemDom[i].style.background = 'pink';
+        //     }
+        // }
+        // {
+        //     let i = 1;
+        //     itemDom[i].onclick = function() {
+        //         itemDom[i].style.background = 'pink';
+        //     }
+        // }
+        // {
+        //     let i = 2;
+        //     itemDom[i].onclick = function() {
+        //         itemDom[i].style.background = 'pink';
+        //     }
+        // }
+        // {
+        //     let i = 3;
+        // }
+    }
+</script>
+</html>

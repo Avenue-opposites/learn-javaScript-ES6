@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>property</title>
+    <!-- 
+        property是js原生对象的直接属性
+        每一个预定义的attribute都会有一个property与之对应
+     -->
+</head>
+<body>
+    <input type="checkbox" node="鸡汤来咯" www="cccc" checked = "1">
+</body>
+<script>
+    var input = document.querySelectorAll("input[type=checkbox]")[0];
+    //property中的访问方式
+    //DOM对象初始化时会在创建默认的基本property
+    //只有在HTML标签中预定义的attribute才会被保存在property中
+    //但自定义的attribute不会出现在property中,即不可以用xx.自定义的attribute这种方式访问,只有预定义的才可以这样访问.
+    console.log(input.checked);//false
+    console.log(input.www);//undefined
+    //修改预定义attribute
+    input.setAttribute("checked","attr");//这个是同步attribute,但不同步property
+    console.log(input.checked);//ture
+    console.log(input.getAttribute("checked"));//attr
+    //修改预定义property
+    input.checked = "no";//对于预定义属性property只有布尔值
+    console.log(input.checked);//ture
+    console.log(input.getAttribute("checked"));//attr attribute不受property影响
+    //修改自定义property
+    input.www = 1;//对于自定义属性必须修改值
+    console.log(input.www);//1 
+    console.log(input.getAttribute("www"));//cccc attribute不受property影响
+    //修改自定义attribute
+    input.setAttribute("www","aaaa");
+    console.log(input.www);//1
+    console.log(input.getAttribute("www"));//aaaa
+
+    /*
+
+        attributes的数据会同步到property上，然而property的更改不会改变attribute；
+        对于value，class这样的属性/特性，数据绑定的方向是单向的，attribute->property；
+        对于id而言，数据绑定是双向的，attribute<=>property；
+        对于disabled而言，property上的disabled为false时，attribute上的disabled必定会并存在，此时数据绑定可以认为是双向的；
+    */
+</script>
+</html>

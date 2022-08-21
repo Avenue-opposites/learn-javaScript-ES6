@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-取消请求</title>
+    <style>
+        #result {
+           width: 300px;
+           height: 200px;
+           border: 1px solid #000;
+           margin: 20px auto;
+       }
+   </style>
+</head>
+<body>
+    <button id="btn">send</button>
+    <button id="btnc">cancel</button>
+    <div class="" id="result"></div>
+</body>
+<script>
+    const reslut = document.querySelector("#result");
+    const btn = document.querySelector("#btn");
+    const btnc = document.querySelector("#btnc");
+    let XHR = null;
+    btn.addEventListener('click',function() {
+        XHR = new XMLHttpRequest();
+        XHR.open('GET','http://127.0.0.1:8000/delay');
+        XHR.send();
+        XHR.onreadystatechange = function() {
+            if(this.readyState === 4) {
+                if(this.status >= 200 && this.status < 300) {
+                    reslut.innerHTML = this.response;
+                }
+            }
+        };
+    });
+    btnc.onclick = function() {
+        //取消请求
+        XHR.abort();
+    }
+</script>
+</html>

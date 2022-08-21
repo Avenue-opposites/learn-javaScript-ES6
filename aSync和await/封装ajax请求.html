@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发送ajax</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //发送ajax请求,返回Promise对象
+    function sendAJAX(url,type) {
+        //返回Promise对象
+        return new Promise((resolve,reject) => {
+            //创建请求
+            const XML = new XMLHttpRequest();
+            XML.open(type,url);
+            //发送请求
+            XML.send();
+            //响应回调
+            XML.onreadystatechange = function() {
+              if(this.readyState === 4) {
+                  if(this.status >= 200 && this.status < 300) {
+                    //状态正常就返回响应体
+                    resolve(this.response);
+                  } else{
+                    //状态不正常就返回状态码
+                    reject(this.status);
+                  }
+              }  
+            };
+        });
+    };
+async function test(url,type) {
+    try {
+      //等待保存响应体
+      let result = await sendAJAX(url,type);
+      console.log(result);
+      return result;
+      //异常捕获
+    }catch(err) {
+      console.error(err);
+    }
+    };
+
+test('http://127.0.0.1:3000/server','GET');
+</script>
+</html>

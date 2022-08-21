@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数的实践和应用场景</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+            border-radius: 5px;
+            transition: all .3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+<script>
+    window.onload = function() {
+        let boxDom = document.querySelector(".box");
+        //需求一：点击元素2秒后变成红色
+        boxDom.onclick = function() {
+            //箭头函数的this是指向声明是所在作用域的this
+            //这里this指向了onclick的this也就是boxDom
+            setTimeout(() => {
+                this.style.background = "red";
+            },2000);
+        };
+        //需求二：从数组中返回偶数的元素
+        let arr = [1,2,3,4,5,6,7,8,9,10];
+        let result = arr.filter(value => !(value%2));
+        //取奇数
+        let results = arr.filter(value => value%2);
+        console.log(result);
+        console.log(results);
+        // let result = arr.filter(value => {
+        //     if(value%2 === 0) {
+        //         return true;
+        //     }else {
+        //         return false;
+        //     }
+        // });
+        //console.log(result);
+
+        // for(let i in arr) {
+        //     // if(arr[i]/2 === parseInt(arr[i]/2)) {
+        //     //     console.log(arr[i]);
+        //     // }
+
+        //     if(arr[i]%2 === 0) {
+        //         console.log(arr[i]);
+        //     }
+        // }
+
+        //箭头函数适合与this无关的回调,比如定时器,数组方法
+        //箭头函数不适合与this有关的回调,比如事件回调,对象的方法
+    }
+</script>
+</html>

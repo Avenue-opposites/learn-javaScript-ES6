@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-jQuery发送AJAX请求</title>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+        } */
+        h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 5em;
+            border-bottom: 1px solid #000;
+            padding: 10px;
+            margin: 5px;
+            text-shadow: 2px 0 5px rgb(221, 43, 43);
+        }
+        .get,.post,.currency {
+            height: 40px;
+            border-radius: 5px;
+            margin-left: 10px;
+            padding: 10px;
+            box-shadow: 1px 0 3px 0 #000;
+            transition: all .3s;
+        }
+        .get {
+            background-color: rgb(224, 114, 114);
+        }
+        .post {
+            background-color: rgb(59, 195, 219);
+        }
+        .currency {
+            background-color: rgb(228, 160, 33);
+        }
+        .get:hover {
+            background-color: rgb(250, 0, 0);
+        }
+        .post:hover {
+            background-color: rgb(0, 238, 255);
+        }
+        .currency:hover {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>jQuery发送AJAX请求</h1>
+    <button class="get">GET</button>
+    <button class="post">POST</button>
+    <button class="currency">CURRENCY</button>
+</body>
+<script>
+    //获取3个按钮元素
+    const getBtn = $(".get");
+    const postBtn = $(".post");
+    const currency = $(".currency");
+    //绑定点击事件
+    getBtn.click(function() {
+        //发送GET请求
+        //get方法参数：
+        //1.url 2.参数对象 
+        //3.回调函数 有一个默认参数,这个参数是响应体
+        //4.设置响应体数据类型
+        $.get('http://127.0.0.1:8000/jQuery-server',{name:"不知火",xingBie:"girl"},function(data) {
+            console.log(data);
+        },'json');
+    });
+    postBtn.click(function() {
+        $.post('http://127.0.0.1:8000/jQuery-server',{name:"鬼王酒吞童子",xingBie:"boy"},function(data) {
+            console.log(data);
+        },'json');
+    });
+    currency.click(function() {
+        //参数是一个对象
+        $.ajax({
+            //url
+            url:'http://127.0.0.1:8000/jQuery-server',
+            //请求参数
+            data:{
+                name:"玉藻前",
+                xingBie:"?"
+            },
+            //响应体类型
+            dataType:'json',
+            //请求类型
+            type:'GET',
+            //发送成功的回调函数
+            //头信息
+            headers:{
+                a:100,
+                b:200
+            },
+            success:function(data) {
+                console.log(data);
+            },
+            //超时时间设置
+            timeout:2000,
+            //发送失败的回调函数
+            error:function() {
+                alert("发送失败,网络超时(是不是没开服务端？)！")
+            }
+        });
+    });
+</script>
+</html>

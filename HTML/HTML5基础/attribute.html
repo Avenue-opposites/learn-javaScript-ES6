@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attribute</title>
+        <!-- 
+            attribute是HTML元素的特性,它的值只能是字符串
+                包括预定义属性和自定义属性
+        -->
+</head>
+<body>
+    <!-- 节点名称默认转成小写的 -->
+    <input type="checkbox" node="鸡汤来咯" checked>
+</body>
+<script>
+    var input = document.querySelectorAll("input[type=checkbox]")[0];
+    //debugger 手动断点
+    // console.log(input.attributes[1].nodeValue= "凸(艹皿艹 )");
+    /*每个元素的属性列表的属性都有以下这3个属性：
+                                            nodeName 代表属性的名字
+                                            nodeType 代表节点的类型 1是元素节点 2是属性节点 3是文本节点
+                                            nodeValue 代表属性的值
+    */                                        
+</script>
+</html>

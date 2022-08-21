@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise初体验</title>
+    <style>
+        p {
+            border-bottom:1px solid #000 ;
+            font-size: 2.5em;
+        }
+        button {
+            width: 100px;
+            height: 50px;
+            background-color: greenyellow;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <p>Promise初体验</p>
+    <button>点击抽奖</button>
+</body>
+<script>
+    function rand(min,max) {
+        return Math.floor(Math.random() * (max-min+1)+min);
+    }
+    document.getElementsByTagName("button")[0].onclick = function() {
+        let r = rand(1,100);
+        //Promise 形式实现
+        //参数为一个函数,必须要有两个形参
+        //resolve 意为解决 函数类型数据
+        //reject 意为拒绝 函数类型数据
+        const pro = new Promise((resolve,reject) => {
+            if(r >= 70) {
+                resolve(r);//可以将Promise对象的状态设置为成功
+        }else {
+            reject(r);//可以将Promise对象的状态设置为失败
+        }
+        //value 为值
+        //reason 为理由
+        }).then(value => alert(`中奖了,值为${value}`),reason => alert(`没中奖,值为${reason}`));
+    }
+</script>
+</html>

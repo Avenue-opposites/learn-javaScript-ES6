@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-取消重复请求</title>
+</head>
+<body>
+    <button id="btn">send</button>
+</body>
+<script>
+    //获取按钮
+    const btn = document.getElementById("btn");
+    //创建一个变量代表是否正在发送请求,默认是不在发送
+    let isSending = false;
+    //为按钮绑定点击事件
+    btn.addEventListener('click',function() {
+        //判断如果正在发送请求就返回
+        if(isSending) {
+            return 
+        }
+        //创建请求
+        const XHR = new XMLHttpRequest();
+        //创建请求之后把发送状态改为true
+        isSending = true;
+        XHR.open('GET','http://127.0.0.1:8000/delay');
+        XHR.send();
+        XHR.onreadystatechange = function() {
+            if(this.readyState === 4) {
+                //服务器返回内容之后,把发送状态改回false
+                isSending = false;
+                if(this.status >= 200 && this.status < 300) {
+                    console.log(isSending);
+                }
+            }
+        };
+    });
+</script>
+</html>

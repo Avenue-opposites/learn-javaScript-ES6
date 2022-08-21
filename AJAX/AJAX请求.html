@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: rgb(140, 141, 146);
+        }
+        span {
+            color: rgb(109, 224, 94);
+        }
+    </style>
+</head>
+<body>
+    <header style="border-bottom: 2px solid #000;">
+        <h1>AJAX</h1>
+        <ol>
+            <li>无需刷新页面服务器端通信</li>
+            <li>允许你根据用户事件来更新部分内容</li>
+        </ol>
+    </header>
+    <div style="border-bottom: 2px solid #000;">
+        <h1>HTTP</h2>
+        <p style="font-size: 20px;">请求报文
+            <ol>
+                <li>请求行 就是请求类型,比如：
+                    <span>"GET"(GET请求时,请求体必须是空的)</span>或<span>"POST"(GET请求时,请求体必须是有请求参数的)</span>,
+                    以及/hello.txt HTTP/1.1
+                </li>
+                <li>请求头 有Host Cookie User-Agent Accept-Language</li>
+                <li>空行</li>
+                <li>请求数据</li>
+            </ol>
+            <p>大概格式如下：</p>
+            <p style="margin-left: 30px;">
+                GET /hello.txt HTTP/1.1<br>
+                User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3<br>
+                Host: www.example.com<br>
+                Accept-Language: en, mi
+            </p>
+        </p>
+        <p style="font-size: 20px;">响应报文
+            <ol>
+                <li>状态行</li>
+                <li>消息报头</li>
+                <li>空行</li>
+                <li>响应正文</li>
+            </ol>
+            <p>大概格式如下：</p>
+            <p style="margin-left: 30px;">
+                HTTP/1.1 200 OK<br>
+                Date: Mon, 27 Jul 2009 12:28:53 GMT<br>
+                Server: Apache<br>
+                Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT<br>
+                ETag: "34aa387-d-1568eb00"<br>
+                Accept-Ranges: bytes<br>
+                Content-Length: 51<br>
+                Vary: Accept-Encoding<br>
+                Content-Type: text/plain                
+            </p>
+        </p>
+    </div>
+</body>
+</html>

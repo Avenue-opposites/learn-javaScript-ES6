@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扩展运算符的应用</title>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</body>
+<script>
+    const shuchuYH = ["破势","狂骨","针女","心眼"];
+    const fuzhuYH = ["招财猫","火灵"];
+    //1.拼接数组
+    const YH = [...shuchuYH,...fuzhuYH];
+    //console.log(YH);//["破势","狂骨","针女","心眼","招财猫","火灵"]
+    //2.数组的克隆(浅拷贝) 修改基本数据类型不会影响原数组,都是修改引用数据类型会影响原数组
+    const arr = [
+        {name:"阿修罗",age:20},
+        [...YH],
+        1
+    ];
+    const arr2 = [...arr];
+    console.log(arr);
+    console.log(arr2);
+    arr2[0].name = "帝释天";
+    arr2[1][6] = "共潜";
+    arr2[2] = 2;
+    console.log(arr);
+    console.log(arr2);
+
+    //3.将伪数组转换成真数组
+    const boxDom = document.querySelectorAll(".box");
+    const boxDomArr = [...boxDom];
+    console.log(boxDom);// NodeList(3) [div.box, div.box, div.box] 原型是object
+    console.log(boxDomArr);// [div.box, div.box, div.box] 原型是Array
+</script>
+</html>
